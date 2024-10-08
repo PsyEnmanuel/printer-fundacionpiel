@@ -21,6 +21,7 @@ let appLauncher = new AutoLaunch({
   isHidden: false
 });
 
+
 // Enable auto-launch
 appLauncher.isEnabled().then((isEnabled) => {
   if (!isEnabled) {
