@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Saonas Gestor de Impresión</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-size: 18px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="bg-sky-800 text-white text-center">{{ message }}</div>
+      <div class="p-4 w-full flex justify-center items-center">
+        <div class="flex flex-col items-center">
+          <img src="../../public/logo.png" alt="" />
+          <p class="text-3xl">{{ message }}</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const { createApp } = Vue;
+      createApp({
+        data() {
+          return {
+            timeout: null,
+            message: "Status message...",
+            url: "https://fundacionpiel.saonas.com",
+          };
+        },
+        methods: {
+          updateMessage(event, message) {
+            state.message = message;
+          },
+        },
+        mounted() {
+          window.bridge.receiveMessage("fromMain", (val) => {
+            this.message = val;
+          });
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
